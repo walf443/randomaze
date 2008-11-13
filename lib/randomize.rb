@@ -7,4 +7,5 @@ module Randomize
   module_function :rand
 
   autoload :String, 'randomize/string'
+  autoload :Time, 'randomize/time'
 end
