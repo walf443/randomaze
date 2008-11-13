@@ -27,7 +27,7 @@ begin
       set_fixtures([
         [ :alpha  => /\A[a-zA-Z]+\z/],
         [ :number => /\A[0-9]+\z/],
-        [ :hex    => /\A[0-9a-z]+\z/],
+        [ :hex    => /\A[0-9a-f]+\z/],
         [ :alnum  => /\A[0-9a-zA-Z]+\z/],
       ])
     end
