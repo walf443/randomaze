@@ -7,7 +7,6 @@ describe Randomize::Time do
       to   = Time.utc(2008, 12, 14)
       10.times do
         date = Randomize::Time.between from..to
-        p date.to_s
         ( from..to ).should include(date)
       end
     end
