@@ -13,6 +13,15 @@ begin
         end
       end
 
+      it '#:meth should be able to specify length' do |meth,|
+        self.class.class_eval do
+          include Randomize::String::Inflection
+        end
+        10.times do
+          __send__(meth, 10) {|i| i.size.should == 10 }
+        end
+      end
+
       desc_filters(:meth => :to_s)
 
       set_fixtures([
