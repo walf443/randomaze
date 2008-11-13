@@ -13,12 +13,21 @@ begin
         end
       end
 
+      it '#:meth should be able to specify length' do |meth,|
+        self.class.class_eval do
+          include Randomize::String::Basic
+        end
+        10.times do
+          __send__(meth, 10) {|i| i.size.should == 10 }
+        end
+      end
+
       desc_filters(:meth => :to_s)
 
       set_fixtures([
         [ :alpha  => /\A[a-zA-Z]+\z/],
         [ :number => /\A[0-9]+\z/],
-        [ :hex    => /\A[0-9a-f]+\z/],
+        [ :hex    => /\A[0-9a-z]+\z/],
         [ :alnum  => /\A[0-9a-zA-Z]+\z/],
       ])
     end
