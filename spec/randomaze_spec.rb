@@ -1,5 +1,5 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
-require 'randomize'
+require 'randomaze'
 
-describe Randomize do
+describe Randomaze do
 end

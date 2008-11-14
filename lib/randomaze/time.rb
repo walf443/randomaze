@@ -1,6 +1,6 @@
 
 require 'time'
-module Randomize
+module Randomaze
   module Time
     def between range
       min, max = nil, nil
@@ -12,7 +12,7 @@ module Randomize
         max = ::Time.parse(range.last).to_f
       end
 
-      epoch = Randomize.rand( max - min ) + min
+      epoch = Randomaze.rand( max - min ) + min
       ::Time.at(epoch)
     end
     module_function :between

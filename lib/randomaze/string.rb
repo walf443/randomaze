@@ -1,4 +1,4 @@
-module Randomize
+module Randomaze
   module String
     module Core
       def default_max_length
@@ -6,7 +6,7 @@ module Randomize
       end
 
       def random_length
-        Randomize.rand(default_max_length, 1)
+        Randomaze.rand(default_max_length, 1)
       end
 
       def default_max_length= int
@@ -19,7 +19,7 @@ module Randomize
         check_result check do
           result = []
           length.times do
-            result << array[Randomize.rand(array.size)]
+            result << array[Randomaze.rand(array.size)]
           end
           result.join
         end
@@ -44,7 +44,7 @@ module Randomize
 
     module Utils
       def rand_base
-        Randomize::String
+        Randomaze::String
       end
     end
 
@@ -62,25 +62,25 @@ module Randomize
 
       # For exmaple, "abcAbc".
       # If you'd like to get only downcase word, please use it with followings:
-      #   Randomize::String.alpha(6, ALPHA_DOWNCASE) #=> 'abcabc'
+      #   Randomaze::String.alpha(6, ALPHA_DOWNCASE) #=> 'abcabc'
       #
-      def alpha length=Randomize::String.random_length, type=ALPHA, &check
-        Randomize::String.from_array(type, length, &check)
+      def alpha length=Randomaze::String.random_length, type=ALPHA, &check
+        Randomaze::String.from_array(type, length, &check)
       end
 
       # For exmaple, "01234".
-      def number length=Randomize::String.random_length, &check
-        Randomize::String.from_array(NUMBER, length, &check)
+      def number length=Randomaze::String.random_length, &check
+        Randomaze::String.from_array(NUMBER, length, &check)
       end
 
       # For exmaple, "0139af".
-      def hex length=Randomize::String.random_length, &check
-        Randomize::String.from_array(HEX, length, &check)
+      def hex length=Randomaze::String.random_length, &check
+        Randomaze::String.from_array(HEX, length, &check)
       end
 
       # For exmaple, "019abc".
-      def alnum length=Randomize::String.random_length, array=ALPHA, &check
-        Randomize::String.from_array(array + NUMBER, length, &check )
+      def alnum length=Randomaze::String.random_length, array=ALPHA, &check
+        Randomaze::String.from_array(array + NUMBER, length, &check )
       end
     end
 
@@ -90,9 +90,9 @@ module Randomize
 
         # For exmaple, "CamelCase", "Camel20Case".
         # If you'd like to get start from downcase char, please use it with followings:
-        #   Randomize::String.calme_case(6, ALPHA_DOWNCASE) #=> 'camelCase'
+        #   Randomaze::String.calme_case(6, ALPHA_DOWNCASE) #=> 'camelCase'
         #
-        def camel_case length=Randomize::String.random_length, start=rand_base::ALPHA_UPCASE, &check
+        def camel_case length=Randomaze::String.random_length, start=rand_base::ALPHA_UPCASE, &check
           rand_base.check_result check do
             rand_base.alpha(1, start) + rand_base.alnum(length-1, rand_base::ALPHA)
           end

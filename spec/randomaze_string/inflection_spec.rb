@@ -2,11 +2,11 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 begin
   require 'spec/fixture'
 
-  describe Randomize::String::Inflection do
+  describe Randomaze::String::Inflection do
     with_fixtures :meth => :pattern do
       it "#:meth should match :pattern" do |meth,pattern|
         self.class.class_eval do
-          include Randomize::String::Inflection
+          include Randomaze::String::Inflection
         end
         100.times do 
           __send__(meth) {|i| i.should =~ pattern }
@@ -15,7 +15,7 @@ begin
 
       it '#:meth should be able to specify length' do |meth,|
         self.class.class_eval do
-          include Randomize::String::Inflection
+          include Randomaze::String::Inflection
         end
         10.times do
           __send__(meth, 10) {|i| i.size.should == 10 }

@@ -1,5 +1,5 @@
 
-= randomize
+= randomaze
 
 == Synopsis
 
@@ -13,7 +13,7 @@
 
 === Gem Installation
 
-	gem install randomize
+	gem install randomaze
 
 == Features/Problems
 

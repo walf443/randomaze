@@ -12,7 +12,7 @@ include FileUtils
 
 load File.join(File.dirname(__FILE__), 'tasks', 'basic_config.rake')
 
-NAME              = "randomize"
+NAME              = "randomaze"
 DESCRIPTION       = <<-"END_DESCRIPTION"
 random object maker framework.
 END_DESCRIPTION
@@ -20,7 +20,7 @@ BIN_FILES         = %w(  )
 VERS              = "0.0.1"
 
 EXTRA_RDOC_FILES = []
-HECKLE_ROOT_MODULES = ["Randomize"]
+HECKLE_ROOT_MODULES = ["Randomaze"]
 
 SPEC = Gem::Specification.new do |s|
 	s.name              = NAME
