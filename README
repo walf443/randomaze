@@ -1,7 +1,23 @@
 
 = randomaze
+random object generator.
 
 == Synopsis
+
+  require 'randomaze'
+
+  # generating string.
+
+  # useful basic functions.
+  Randomaze::String.alpha     #=> "afefw2"
+  Randomaze::String.alpha(10) #=> "afefw2rr0a"
+
+  # you can generate randam string with regexp like expression.
+  Randomaze::String.parse('[a-z]{5}[0-9]{3}') #=> "feawr342"
+
+
+  # generate time object.
+  Randomaze::Time.between('2008-10-01'..'2009-01-01') #=> Fri Dec 19 21:14:12 +0900 2008
 
 == Description
 
@@ -22,3 +38,4 @@
 Author::    Keiji, Yoshimi <walf443 at gmail.com>
 Copyright:: Copyright (c) 2008 Keiji, Yoshimi
 License:: you can redistribute it and/or modify it under the same terms as Ruby itself.
+
