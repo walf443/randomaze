@@ -9,7 +9,7 @@ begin
           include Randomaze::String::Basic
         end
         10.times do 
-          __send__(meth) {|i| i.should =~ pattern }
+          __send__(meth).should =~ pattern
         end
       end
 
@@ -18,7 +18,7 @@ begin
           include Randomaze::String::Basic
         end
         10.times do
-          __send__(meth, 10) {|i| i.size.should == 10 }
+          __send__(meth, 10).size.should == 10
         end
       end
 

@@ -57,6 +57,17 @@ module Randomaze
       # Run +block+ and apply the result to +check_proc+.
       # If +check_proc+'s result is true, return nil. And else return +block+'s result.
       # It's useful for you to define your custom random string generator.
+      #
+      # you can skip generated value in block_lists like followings:
+      #
+      #   random_string = nil
+      #   loop do
+      #     random_string = YourMod.your_method(length) {|result| black_lists.include?(result) }
+      #     break if random_string
+      #   end
+      #
+      #   # do some thing with random_string.
+      #
       def check_result check_proc=nil, &block
         result = block.call
         if check_proc && check_proc.call(result)
