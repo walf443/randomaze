@@ -48,4 +48,19 @@ SPEC = Gem::Specification.new do |s|
 	s.extensions = EXTENSIONS
 end
 
+def racc_gen target
+  racc_file = target.gsub(/\.rb$/, '.y')
+  file target => [ racc_file ] do
+    system("racc", racc_file, "-o", target)
+  end
+
+  desc 'geenerate ruby file from racc'
+  task :racc_convert => [ target ] do
+  end
+end
+
+racc_gen 'lib/randomaze/string/template_parser.rb'
+
 import File.join(File.dirname(__FILE__), 'tasks', 'basic_tasks.rake')
+
+task :spec => [ :racc_convert ]

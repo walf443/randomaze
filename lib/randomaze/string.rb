@@ -1,5 +1,7 @@
 module Randomaze
   module String
+    autoload :TemplateParser, 'randomaze/string/template_parser'
+
     module Core
       def default_max_length
         @default_max_length ||= 19
@@ -23,6 +25,33 @@ module Randomaze
           end
           result.join
         end
+      end
+
+      #
+      # Randomaze::String.from_template([['a'..'z',3], '__', [0..9, 2 ]] ) #=> 'abc__01
+      #
+      def from_template templates, options={}, &check
+        check_result check do
+          results = []
+          templates.each do |item|
+            results << case item
+            when Array
+              set = item.first
+              set = set.map {|i| i.to_a }.flatten
+              lenght = item.last
+
+              from_array(set, lenght)
+            else
+              item
+            end
+          end
+          results.join
+        end
+      end
+
+      def parse template, &check
+        templates = Randomaze::String::TemplateParser.parse(template)
+        from_template(templates, &check)
       end
 
       # Run +block+ and apply the result to +check_proc+.
