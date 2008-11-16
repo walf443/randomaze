@@ -22,6 +22,14 @@ begin
         end
       end
 
+      it '#format should generate random string from regex with #source' do |template,expect|
+        [/#{template}/, /#{template}/i, /#{template}/m, /#{template  }/x ].each do |regex|
+          10.times do
+            result = Randomaze::String.format(regex.source)
+            result.should =~ /#{template}/
+          end
+        end
+      end
       set_fixtures([
         [ { "[0-9]{1}"          => [[[0..9], 1]]                      }, 'numeric'],
         [ { "[a-z]{1}"          => [[['a'..'z'], 1]]                  }, 'alpha_downcase'],
