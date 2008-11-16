@@ -13,6 +13,10 @@ rule
               token = val.shift
               result = [ ['a'..'z', 'A'..'Z', 0..9, '_'], 1 ]
             }
+            | SELECT_START expr SELECT_END
+            {
+              result = val[1]
+            }
             | SELECT_START expr '|' expr SELECT_END
             {
               result = Set.new([val[1], val[3]])

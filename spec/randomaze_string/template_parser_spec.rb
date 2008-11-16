@@ -57,6 +57,7 @@ begin
         [ { "-_"                => ['-_']                             }, 'with non-random expression'],
         [ { "あいう"            => ['あいう']                         }, 'with non-random expression'],
 
+        [ { "(abc)"             => ['abc']                            }, 'with non-select expression' ],
         [ { "(abc|def)"         => [Set.new(['abc', 'def'])]          }, 'with select expression'],
         [ { "(abc|[a-z])"       => [Set.new(['abc', [['a'..'z'], 1]])] }, 'mix with select expression and set_expr '],
 
