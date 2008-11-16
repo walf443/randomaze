@@ -43,7 +43,10 @@ begin
         [ { "-_"                => ['-_']                             }, 'with non-random expression'],
         [ { "あいう"            => ['あいう']                         }, 'with non-random expression'],
 
-        [ { '\d{1}'             => [[[0..9], 1]]                      }, 'with non-set expression ( \d )'],
+        [ { '\d'                => [[[0..9], 1]]                           }, 'with non-set expression ( \d )'],
+        [ { '\w'                => [[['a'..'z', 'A'..'Z', 0..9, '_'], 1]]  }, 'with non-set expression ( \d )'],
+
+        [ { '\d{1}'             => [[[0..9], 1]]                           }, 'with non-set expression ( \d )'],
         [ { '\w{1}'             => [[['a'..'z', 'A'..'Z', 0..9, '_'], 1]]  }, 'with non-set expression ( \d )'],
 
         [ { "abc[0-9]{1}"             => ['abc', [[0..9], 1]]                     }, 'mixed with non-random expression in head'],

@@ -8,19 +8,15 @@ rule
             }
 
   expr      : IDENT_WORD
+            | META_SET
+            {
+              token = val.shift
+              result = [ meta_set(token), 1]
+            }
             | META_SET count_expr
             {
               token, count = val
-              result =
-                case token
-                when '\w'
-                  # FIXME: \w is not generate multi byte character.
-                  [ ['a'..'z', 'A'..'Z', 0..9, '_'], count ]
-                when '\d'
-                  [ [0..9], count ]
-                else
-                  raise Racc::ParseError, "not support meta character #{token}"
-                end
+              result = [ meta_set(token), count ]
             }
             | EXPR_START sets_expr count_expr
             {
@@ -77,16 +73,7 @@ rule
   meta_set  | META_SET
             {
               first = val.shift
-              result =
-                case first
-                when '\w'
-                  # FIXME: \w is not generate multi byte character.
-                  ['a'..'z', 'A'..'Z', 0..9, '_']
-                when '\d'
-                  [0..9]
-                else
-                  raise Racc::ParseError, "not support meta character #{first}"
-                end
+              result = meta_set(first)
             }
 
   alnum     : ALPHA
@@ -116,6 +103,18 @@ def parse str
   arr << tmp.first
 
   arr
+end
+
+def meta_set str
+  case str
+  when '\w'
+    # FIXME: \w is not generate multi byte character.
+    ['a'..'z', 'A'..'Z', 0..9, '_']
+  when '\d'
+    [0..9]
+  else
+    raise Racc::ParseError, "not support meta character #{first}"
+  end
 end
 
 def next_token

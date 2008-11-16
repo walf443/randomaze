@@ -16,7 +16,7 @@ module Randomaze
 
     class TemplateParser < Racc::Parser
 
-module_eval <<'..end lib/randomaze/string/template_parser.y modeval..id2cabf63a00', 'lib/randomaze/string/template_parser.y', 101
+module_eval <<'..end lib/randomaze/string/template_parser.y modeval..idf87ddbb7d4', 'lib/randomaze/string/template_parser.y', 88
 
 def self.parse str
   new.parse(str)
@@ -35,6 +35,18 @@ def parse str
   arr << tmp.first
 
   arr
+end
+
+def meta_set str
+  case str
+  when '\w'
+    # FIXME: \w is not generate multi byte character.
+    ['a'..'z', 'A'..'Z', 0..9, '_']
+  when '\d'
+    [0..9]
+  else
+    raise Racc::ParseError, "not support meta character #{first}"
+  end
 end
 
 def next_token
@@ -93,7 +105,7 @@ def self.tokenize str
   tokens
 end
 
-..end lib/randomaze/string/template_parser.y modeval..id2cabf63a00
+..end lib/randomaze/string/template_parser.y modeval..idf87ddbb7d4
 
 ##### racc 1.4.5 generates ###
 
@@ -102,23 +114,24 @@ racc_reduce_table = [
  0, 16, :_reduce_none,
  2, 16, :_reduce_2,
  1, 17, :_reduce_none,
- 2, 17, :_reduce_4,
- 3, 17, :_reduce_5,
- 3, 19, :_reduce_6,
- 3, 18, :_reduce_7,
+ 1, 17, :_reduce_4,
+ 2, 17, :_reduce_5,
+ 3, 17, :_reduce_6,
+ 3, 19, :_reduce_7,
+ 3, 18, :_reduce_8,
  0, 20, :_reduce_none,
- 2, 20, :_reduce_9,
+ 2, 20, :_reduce_10,
  1, 21, :_reduce_none,
- 1, 21, :_reduce_11,
- 1, 22, :_reduce_12,
+ 1, 21, :_reduce_12,
+ 1, 22, :_reduce_13,
  1, 23, :_reduce_none,
  1, 23, :_reduce_none,
  2, 23, :_reduce_none,
- 1, 23, :_reduce_16,
+ 1, 23, :_reduce_17,
  1, 24, :_reduce_none,
  1, 24, :_reduce_none ]
 
-racc_reduce_n = 19
+racc_reduce_n = 20
 
 racc_shift_n = 30
 
@@ -138,9 +151,9 @@ racc_action_pointer = [
    nil,    19,   nil,    -3,   nil,   nil,   nil,   nil,   nil,   nil ]
 
 racc_action_default = [
-    -1,    -3,   -19,   -19,   -19,    -1,   -19,    -4,    -8,   -19,
-   -19,    -2,   -19,   -13,   -10,   -19,   -11,   -17,   -14,   -18,
-   -16,   -19,   -12,    -8,    -5,    30,    -7,   -15,    -6,    -9 ]
+    -1,    -3,    -4,   -20,   -20,    -1,   -20,    -5,    -9,   -20,
+   -20,    -2,   -20,   -14,   -11,   -20,   -12,   -18,   -15,   -19,
+   -17,   -20,   -13,    -9,    -6,    30,    -8,   -16,    -7,   -10 ]
 
 racc_goto_table = [
     21,     7,     4,     9,   nil,   nil,   nil,    11,    24,   nil,
@@ -237,25 +250,24 @@ module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 8
 
  # reduce 3 omitted
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 24
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 15
   def _reduce_4( val, _values, result )
-              token, count = val
-              result =
-                case token
-                when '\w'
-                  # FIXME: \w is not generate multi byte character.
-                  [ ['a'..'z', 'A'..'Z', 0..9, '_'], count ]
-                when '\d'
-                  [ [0..9], count ]
-                else
-                  raise Racc::ParseError, "not support meta character #{token}"
-                end
+              token = val.shift
+              result = [ meta_set(token), 1]
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 34
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 20
   def _reduce_5( val, _values, result )
+              token, count = val
+              result = [ meta_set(token), count ]
+   result
+  end
+.,.,
+
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 30
+  def _reduce_6( val, _values, result )
               first = val.shift
               result = nil
               if first == '['
@@ -267,8 +279,8 @@ module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 34
   end
 .,.,
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 45
-  def _reduce_6( val, _values, result )
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 41
+  def _reduce_7( val, _values, result )
               array = []
               val[1].flatten.each do |range|
                 next unless range
@@ -280,33 +292,33 @@ module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 45
   end
 .,.,
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 50
-  def _reduce_7( val, _values, result )
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 46
+  def _reduce_8( val, _values, result )
               result = val[1]
    result
   end
 .,.,
 
- # reduce 8 omitted
+ # reduce 9 omitted
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 56
-  def _reduce_9( val, _values, result )
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 52
+  def _reduce_10( val, _values, result )
               result = val
    result
   end
 .,.,
 
- # reduce 10 omitted
+ # reduce 11 omitted
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 62
-  def _reduce_11( val, _values, result )
-              result = val
-   result
-  end
-.,.,
-
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 72
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 58
   def _reduce_12( val, _values, result )
+              result = val
+   result
+  end
+.,.,
+
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 68
+  def _reduce_13( val, _values, result )
               first,last = val.first.to_a
               if first =~ /\d/ && last =~ /\d/
                 first = first.to_i
@@ -317,32 +329,23 @@ module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 72
   end
 .,.,
 
- # reduce 13 omitted
-
  # reduce 14 omitted
 
  # reduce 15 omitted
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 90
-  def _reduce_16( val, _values, result )
+ # reduce 16 omitted
+
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 77
+  def _reduce_17( val, _values, result )
               first = val.shift
-              result =
-                case first
-                when '\w'
-                  # FIXME: \w is not generate multi byte character.
-                  ['a'..'z', 'A'..'Z', 0..9, '_']
-                when '\d'
-                  [0..9]
-                else
-                  raise Racc::ParseError, "not support meta character #{first}"
-                end
+              result = meta_set(first)
    result
   end
 .,.,
 
- # reduce 17 omitted
-
  # reduce 18 omitted
+
+ # reduce 19 omitted
 
  def _reduce_none( val, _values, result )
   result
