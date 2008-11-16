@@ -8,6 +8,20 @@ rule
             }
 
   expr      : IDENT_WORD
+            | META_SET count_expr
+            {
+              token, count = val
+              result =
+                case token
+                when '\w'
+                  # FIXME: \w is not generate multi byte character.
+                  [ ['a'..'z', 'A'..'Z', 0..9, '_'], count ]
+                when '\d'
+                  [ [0..9], count ]
+                else
+                  raise Racc::ParseError, "not support meta character #{token}"
+                end
+            }
             | EXPR_START sets_expr count_expr
             {
               first = val.shift
@@ -136,6 +150,8 @@ def self.tokenize str
       end
     else
       case
+      when s.scan(/\\./)
+        tokens.push([:META_SET, s[0]])
       when s.scan(/\[/)
         set_start_fg = true
         tokens.push([:EXPR_START, '[' ])
