@@ -45,13 +45,7 @@ module Randomaze
         check_result check do
           results = []
           templates.each do |item|
-            results << case item
-            when Set
-              pick = item.to_a[Randomaze.rand(item.size)]
-              _gen_random_element(pick)
-            else
-              _gen_random_element(item)
-            end
+            results << _gen_random_element(item)
           end
           results.join
         end
@@ -65,6 +59,9 @@ module Randomaze
           lenght = item.last
 
           from_array(set, lenght)
+        when Set
+          pick = item.to_a[Randomaze.rand(item.size)]
+          _gen_random_element(pick)
         else
           item
         end
