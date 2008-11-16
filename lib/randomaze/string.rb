@@ -49,7 +49,7 @@ module Randomaze
         end
       end
 
-      def parse template, &check
+      def format template, &check
         templates = Randomaze::String::TemplateParser.parse(template)
         from_template(templates, &check)
       end

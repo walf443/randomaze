@@ -15,9 +15,9 @@ begin
         end
       end
 
-      it '#parse should generate random string that match :template' do |template,expect|
+      it '#format should generate random string that match :template' do |template,expect|
         10.times do
-          result = Randomaze::String.parse(template)
+          result = Randomaze::String.format(template)
           result.should =~ /#{template}/
         end
       end
