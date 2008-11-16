@@ -46,21 +46,30 @@ module Randomaze
           results = []
           templates.each do |item|
             results << case item
-            when Array
-              set = item.first
-              set = set.map {|i| i.to_a }.flatten
-              lenght = item.last
-
-              from_array(set, lenght)
             when Set
-              item.to_a[Randomaze.rand(item.size)]
+              pick = item.to_a[Randomaze.rand(item.size)]
+              _gen_random_element(pick)
             else
-              item
+              _gen_random_element(item)
             end
           end
           results.join
         end
       end
+
+      def _gen_random_element item
+        case item
+        when Array
+          set = item.first
+          set = set.map {|i| i.to_a }.flatten
+          lenght = item.last
+
+          from_array(set, lenght)
+        else
+          item
+        end
+      end
+      private :_gen_random_element
 
       def format template, &check
         templates = Randomaze::String::TemplateParser.parse(template)
