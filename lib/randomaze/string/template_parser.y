@@ -119,7 +119,7 @@ def self.tokenize str
       when s.scan(/\]/)
         set_start_fg = false
         tokens.push([:SETS_END, ']' ])
-      when s.scan(/([A-Za-z0-9])-([A-Za-z0-9])/)
+      when s.scan(/([\w])-([\w])/)
         tokens.push([ :RANGE, [ s[1], s[2] ] ])
 
       when s.scan(/[0-9]+/)

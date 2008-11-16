@@ -16,7 +16,7 @@ module Randomaze
 
     class TemplateParser < Racc::Parser
 
-module_eval <<'..end lib/randomaze/string/template_parser.y modeval..idef60545eb7', 'lib/randomaze/string/template_parser.y', 86
+module_eval <<'..end lib/randomaze/string/template_parser.y modeval..id4a036b05d9', 'lib/randomaze/string/template_parser.y', 86
 
 def self.parse str
   new.parse(str)
@@ -53,7 +53,7 @@ def self.tokenize str
       when s.scan(/\]/)
         set_start_fg = false
         tokens.push([:SETS_END, ']' ])
-      when s.scan(/([A-Za-z0-9])-([A-Za-z0-9])/)
+      when s.scan(/([\w])-([\w])/)
         tokens.push([ :RANGE, [ s[1], s[2] ] ])
 
       when s.scan(/[0-9]+/)
@@ -91,7 +91,7 @@ def self.tokenize str
   tokens
 end
 
-..end lib/randomaze/string/template_parser.y modeval..idef60545eb7
+..end lib/randomaze/string/template_parser.y modeval..id4a036b05d9
 
 ##### racc 1.4.5 generates ###
 
