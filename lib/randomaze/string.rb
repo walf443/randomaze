@@ -1,6 +1,6 @@
 module Randomaze
   module String
-    autoload :TemplateParser, 'randomaze/string/template_parser'
+    autoload :TemplateParser, 'randomaze/string/template_parser.tab'
 
     module Core
       def default_max_length

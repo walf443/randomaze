@@ -49,7 +49,7 @@ SPEC = Gem::Specification.new do |s|
 end
 
 def racc_gen target
-  racc_file = target.gsub(/\.rb$/, '.y')
+  racc_file = target.gsub(/\.tab\.rb$/, '.y')
   file target => [ racc_file ] do
     system("racc", racc_file, "-o", target)
   end
@@ -59,7 +59,7 @@ def racc_gen target
   end
 end
 
-racc_gen 'lib/randomaze/string/template_parser.rb'
+racc_gen 'lib/randomaze/string/template_parser.tab.rb'
 
 import File.join(File.dirname(__FILE__), 'tasks', 'basic_tasks.rake')
 
