@@ -45,9 +45,11 @@ begin
 
         [ { '\d'                => [[[0..9], 1]]                           }, 'with non-set expression ( \d )'],
         [ { '\w'                => [[['a'..'z', 'A'..'Z', 0..9, '_'], 1]]  }, 'with non-set expression ( \w )'],
+        [ { '.'                 => [[['a'..'z', 'A'..'Z', 0..9, '_'], 1]]  }, 'with non-set expression ( . )'],
 
-        [ { '\d{1}'             => [[[0..9], 1]]                           }, 'with non-set expression ( \d )'],
-        [ { '\w{1}'             => [[['a'..'z', 'A'..'Z', 0..9, '_'], 1]]  }, 'with non-set expression ( \w )'],
+        [ { '\d{2}'             => [[[0..9], 2]]                           }, 'with non-set expression ( \d )'],
+        [ { '\w{2}'             => [[['a'..'z', 'A'..'Z', 0..9, '_'], 2]]  }, 'with non-set expression ( \w )'],
+        [ { '.{2}'              => [[['a'..'z', 'A'..'Z', 0..9, '_'], 2]]  }, 'with non-set expression ( . )'],
 
         [ { "abc[0-9]{1}"             => ['abc', [[0..9], 1]]                     }, 'mixed with non-random expression in head'],
         [ { "__[0-9]{1}"              => ['__', [[0..9], 1]]                      }, 'mixed with non-random expression in head (symbol)'],

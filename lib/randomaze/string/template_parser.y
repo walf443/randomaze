@@ -8,10 +8,20 @@ rule
             }
 
   expr      : IDENT_WORD
+            | DOT
+            {
+              token = val.shift
+              result = [ ['a'..'z', 'A'..'Z', 0..9, '_'], 1 ]
+            }
             | META_SET
             {
               token = val.shift
               result = [ meta_set(token), 1]
+            }
+            | DOT count_expr
+            {
+              token, count = val
+              result = [ ['a'..'z', 'A'..'Z', 0..9, '_'], count ]
             }
             | META_SET count_expr
             {
@@ -151,6 +161,8 @@ def self.tokenize str
       case
       when s.scan(/\\./)
         tokens.push([:META_SET, s[0]])
+      when s.scan(/\./)
+        tokens.push([:DOT, s[0]])
       when s.scan(/\[/)
         set_start_fg = true
         tokens.push([:EXPR_START, '[' ])
