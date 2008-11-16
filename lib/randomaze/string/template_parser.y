@@ -7,7 +7,8 @@ rule
               result = val
             }
 
-  expr      : EXPR_START sets_expr count_expr
+  expr      : IDENT_WORD
+            | EXPR_START sets_expr count_expr
             {
               first = val.shift
               result = nil
@@ -131,6 +132,8 @@ def self.tokenize str
         tokens.push([:COUNT_END, '}' ])
       when s.scan(/[0-9]+/)
         tokens.push([:NUMBER, s[0].to_i ])
+      when s.scan(%r![^\[\{\}\]]+!)
+        tokens.push [:IDENT_WORD, s[0]]
       else
         char = s.getch
         tokens.push [char, char]
