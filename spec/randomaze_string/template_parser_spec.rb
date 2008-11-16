@@ -47,6 +47,7 @@ begin
         [ { "あいう"            => ['あいう']                         }, 'with non-random expression'],
 
         [ { '\d'                => [[[0..9], 1]]                           }, 'with non-set expression ( \d )'],
+        [ { '\d?'               => [[[0..9], 0..1]]                           }, 'with non-set expression ( \d )'],
         [ { '\w'                => [[['a'..'z', 'A'..'Z', 0..9, '_'], 1]]  }, 'with non-set expression ( \w )'],
         [ { '.'                 => [[['a'..'z', 'A'..'Z', 0..9, '_'], 1]]  }, 'with non-set expression ( . )'],
 
