@@ -58,6 +58,19 @@ rule
             }
   ident     : IDENT
             | alnum
+            | meta_set
+
+  meta_set  | META_SET
+            {
+              first = val.shift
+              result =
+                case first
+                when '\w'
+                  ['a'..'z', 'A'..'Z', 0..9]
+                else
+                  raise Racc::ParseError, "not support meta character #{first}"
+                end
+            }
 
   alnum     : ALPHA
             | NUMCHAR
@@ -99,6 +112,8 @@ def self.tokenize str
   until s.eos? do
     if set_start_fg
       case
+      when s.scan(/\\./)
+        tokens.push([:META_SET, s[0]])
       when s.scan(/\]/)
         set_start_fg = false
         tokens.push([:SETS_END, ']' ])
