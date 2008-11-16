@@ -47,9 +47,14 @@ rule
               result = val
             }
 
-  range     : RANGE alnum alnum
+  range     : RANGE
             {
-              result = val[1]..val[2]
+              first,last = val.first.to_a
+              if first =~ /\d/ && last =~ /\d/
+                first = first.to_i
+                last  = last.to_i
+              end
+              result = first..last
             }
   ident     : IDENT
             | alnum
@@ -99,15 +104,6 @@ def self.tokenize str
         tokens.push([:SETS_END, ']' ])
       when s.scan(/([A-Za-z0-9])-([A-Za-z0-9])/)
         tokens.push([ :RANGE, [ s[1], s[2] ] ])
-        if s[1] =~ /[a-zA-Z]/ && s[2] =~ /[a-zA-Z]/
-          tokens.push([ :ALPHA, s[1] ])
-          tokens.push([ :ALPHA, s[2] ])
-        elsif s[1] =~ /[0-9]/ && s[2] =~ /[0-9]/
-          tokens.push([ :NUMCHAR, s[1].to_i ])
-          tokens.push([ :NUMCHAR, s[2].to_i ])
-        else
-          raise Racc::ParseError, "#{s[0]} is wrong"
-        end
 
       when s.scan(/[0-9]+/)
         raise Racc::ParseError, "#{s[0]} is wrong" if s[0].size > 1
