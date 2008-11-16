@@ -13,8 +13,7 @@ random object generator.
   Randomaze::String.alpha(10) #=> "afefw2rr0a"
 
   # you can generate randam string with regexp like expression.
-  Randomaze::String.parse('[a-z]{5}[0-9]{3}') #=> "feawr342"
-
+  Randomaze::String.format('[a-z]{5}[0-9]{3}') #=> "feawr342"
 
   # generate time object.
   Randomaze::Time.between('2008-10-01'..'2009-01-01') #=> Fri Dec 19 21:14:12 +0900 2008
