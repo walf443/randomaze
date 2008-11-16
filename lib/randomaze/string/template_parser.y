@@ -66,7 +66,7 @@ rule
               result =
                 case first
                 when '\w'
-                  ['a'..'z', 'A'..'Z', 0..9]
+                  ['a'..'z', 'A'..'Z', 0..9, '_']
                 else
                   raise Racc::ParseError, "not support meta character #{first}"
                 end
