@@ -58,6 +58,10 @@ rule
              {
                result = val[1]..val[3]
              }
+             | QUESTION
+             {
+               result = 0..1
+             }
 
   sets      :
             | set sets
@@ -147,6 +151,8 @@ def self.tokenize str
         tokens.push([:META_SET, s[0]])
       when s.scan(/\./)
         tokens.push([:DOT, s[0]])
+      when s.scan(/\?/)
+        tokens.push([:QUESTION, s[0]])
       when s.scan(/\[/)
         state = :set_expr
         tokens.push([:EXPR_START, '[' ])

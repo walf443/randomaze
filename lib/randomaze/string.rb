@@ -22,8 +22,12 @@ module Randomaze
           result = []
           case length
           when Range
-            tmp = length.to_a
-            length = tmp[Randomaze.rand(tmp.size)]
+            if length == 0..1
+              length = Randomaze.rand
+            else
+              tmp = length.to_a
+              length = tmp[Randomaze.rand(tmp.size)]
+            end
           end
           length.times do
             result << array[Randomaze.rand(array.size)]
