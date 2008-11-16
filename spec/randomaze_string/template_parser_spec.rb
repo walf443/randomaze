@@ -1,6 +1,7 @@
 require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 begin
   require 'spec/fixture'
+  require 'set'
 
   describe Randomaze::String::TemplateParser do
     with_fixtures :template => :expect do
@@ -55,6 +56,8 @@ begin
         [ { "abc"               => ['abc']                            }, 'with non-random expression'],
         [ { "-_"                => ['-_']                             }, 'with non-random expression'],
         [ { "あいう"            => ['あいう']                         }, 'with non-random expression'],
+
+        [ { "(abc|def)"         => [Set.new(['abc', 'def'])]          }, 'with select expression'],
 
         [ { '\d'                => [[[0..9], 1]]                      }, 'with non-set expression ( \d )'],
         [ { '\d?'               => [[[0..9], 0..1]]                   }, 'with non-set expression ( \d? )'],

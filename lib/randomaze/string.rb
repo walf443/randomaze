@@ -1,3 +1,5 @@
+autoload :Set, 'set'
+
 module Randomaze
   module String
     autoload :TemplateParser, 'randomaze/string/template_parser.tab'
@@ -50,6 +52,8 @@ module Randomaze
               lenght = item.last
 
               from_array(set, lenght)
+            when Set
+              item.to_a[Randomaze.rand(item.size)]
             else
               item
             end

@@ -13,6 +13,10 @@ rule
               token = val.shift
               result = [ ['a'..'z', 'A'..'Z', 0..9, '_'], 1 ]
             }
+            | SELECT_START expr '|' expr SELECT_END
+            {
+              result = Set.new([val[1], val[3]])
+            }
             | META_SET
             {
               token = val.shift
@@ -105,6 +109,7 @@ end
 
 ---- header
 require 'strscan'
+require 'set'
 
 ---- inner
 
@@ -161,10 +166,16 @@ def self.tokenize str
         state = :set_expr
         tokens.push([:EXPR_START, '[' ])
         tokens.push([:SETS_START, '[' ])
+      when s.scan(/\(/)
+        tokens.push([:SELECT_START, '(' ])
+      when s.scan(/\)/)
+        tokens.push([:SELECT_END, ')' ])
+      when s.scan(/\|/)
+        tokens.push(['|', '|' ])
       when s.scan(/\{/)
         state = :count_expr
         tokens.push([:COUNT_START, '{' ])
-      when s.scan(%r![^\\\[\{\}\]]+!)
+      when s.scan(%r![^\)|\\\[\{\}\]]+!)
         tokens.push [:IDENT_WORD, s[0]]
       when s.scan(%r!\\([\?\[\]\{\}\*\+\^\$\\\.\|\(\)])!)
         tokens.push [:IDENT_WORD, s[1]]
