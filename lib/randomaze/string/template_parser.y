@@ -18,6 +18,10 @@ rule
               token = val.shift
               result = [ meta_set(token), 1]
             }
+            | EXPR_START sets_expr
+            {
+              result = [ val[1], 1]
+            }
             | DOT count_expr
             {
               token, count = val
