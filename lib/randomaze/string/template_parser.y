@@ -9,8 +9,13 @@ rule
 
   expr      : EXPR_START sets_expr count_expr
             {
-              val.shift
-              result = val
+              first = val.shift
+              result = nil
+              if first == '['
+                result = val
+              else
+                result = first
+              end
             }
 
   sets_expr : SETS_START sets SETS_END
@@ -64,9 +69,7 @@ end
 
 def parse str
   raise Racc::ParseError if str.empty?
-  @tokens = []
-  @s = StringScanner.new(str)
-  scan_str
+  @tokens = self.class.tokenize str
   result = do_parse
   arr = []
   tmp = result
@@ -83,54 +86,58 @@ def next_token
   @tokens.shift
 end
 
-def scan_str
+def self.tokenize str
+  tokens = []
+  s = StringScanner.new str
   set_start_fg = false
-  until @s.eos? do
+  until s.eos? do
     if set_start_fg
       case
-      when @s.scan(/\]/)
+      when s.scan(/\]/)
         set_start_fg = false
-        @tokens.push([:SETS_END, ']' ])
-      when @s.scan(/([A-Za-z0-9])-([A-Za-z0-9])/)
-        @tokens.push([ :RANGE, [ @s[1], @s[2] ] ])
-        if @s[1] =~ /[a-zA-Z]/ && @s[2] =~ /[a-zA-Z]/
-          @tokens.push([ :ALPHA, @s[1] ])
-          @tokens.push([ :ALPHA, @s[2] ])
-        elsif @s[1] =~ /[0-9]/ && @s[2] =~ /[0-9]/
-          @tokens.push([ :NUMCHAR, @s[1].to_i ])
-          @tokens.push([ :NUMCHAR, @s[2].to_i ])
+        tokens.push([:SETS_END, ']' ])
+      when s.scan(/([A-Za-z0-9])-([A-Za-z0-9])/)
+        tokens.push([ :RANGE, [ s[1], s[2] ] ])
+        if s[1] =~ /[a-zA-Z]/ && s[2] =~ /[a-zA-Z]/
+          tokens.push([ :ALPHA, s[1] ])
+          tokens.push([ :ALPHA, s[2] ])
+        elsif s[1] =~ /[0-9]/ && s[2] =~ /[0-9]/
+          tokens.push([ :NUMCHAR, s[1].to_i ])
+          tokens.push([ :NUMCHAR, s[2].to_i ])
         else
-          raise Racc::ParseError, "#{@s[0]} is wrong"
+          raise Racc::ParseError, "#{s[0]} is wrong"
         end
 
-      when @s.scan(/[0-9]+/)
-        raise Racc::ParseError, "#{@s[0]} is wrong" if @s[0].size > 1
-        @tokens.push([:NUMCHAR, @s[0].to_i ])
-      when @s.scan(/[a-zA-Z]/)
-        @tokens.push([:ALPHA, @s[0] ])
-      when @s.scan(/-/)
-        @tokens.push(['-', @s[0] ])
+      when s.scan(/[0-9]+/)
+        raise Racc::ParseError, "#{s[0]} is wrong" if s[0].size > 1
+        tokens.push([:NUMCHAR, s[0].to_i ])
+      when s.scan(/[a-zA-Z]/)
+        tokens.push([:ALPHA, s[0] ])
+      when s.scan(/-/)
+        tokens.push(['-', s[0] ])
       else
-        s = @s.getch
-        @tokens.push [:IDENT, s]
+        char = s.getch
+        tokens.push [:IDENT, char]
       end
     else
       case
-      when @s.scan(/\[/)
+      when s.scan(/\[/)
         set_start_fg = true
-        @tokens.push([:EXPR_START, '[' ])
-        @tokens.push([:SETS_START, '[' ])
-      when @s.scan(/\{/)
-        @tokens.push([:COUNT_START, '{' ])
-      when @s.scan(/\}/)
-        @tokens.push([:COUNT_END, '}' ])
-      when @s.scan(/[0-9]+/)
-        @tokens.push([:NUMBER, @s[0].to_i ])
+        tokens.push([:EXPR_START, '[' ])
+        tokens.push([:SETS_START, '[' ])
+      when s.scan(/\{/)
+        tokens.push([:COUNT_START, '{' ])
+      when s.scan(/\}/)
+        tokens.push([:COUNT_END, '}' ])
+      when s.scan(/[0-9]+/)
+        tokens.push([:NUMBER, s[0].to_i ])
       else
-        s = @s.getch
-        @tokens.push [s, s]
+        char = s.getch
+        tokens.push [char, char]
       end
     end
   end
+
+  tokens
 end
 
