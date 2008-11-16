@@ -16,7 +16,7 @@ module Randomaze
 
     class TemplateParser < Racc::Parser
 
-module_eval <<'..end lib/randomaze/string/template_parser.y modeval..idec45be7198', 'lib/randomaze/string/template_parser.y', 84
+module_eval <<'..end lib/randomaze/string/template_parser.y modeval..idef60545eb7', 'lib/randomaze/string/template_parser.y', 86
 
 def self.parse str
   new.parse(str)
@@ -91,7 +91,7 @@ def self.tokenize str
   tokens
 end
 
-..end lib/randomaze/string/template_parser.y modeval..idec45be7198
+..end lib/randomaze/string/template_parser.y modeval..idef60545eb7
 
 ##### racc 1.4.5 generates ###
 
@@ -303,13 +303,15 @@ module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 58
 
  # reduce 14 omitted
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 73
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 75
   def _reduce_15( val, _values, result )
               first = val.shift
               result =
                 case first
                 when '\w'
                   ['a'..'z', 'A'..'Z', 0..9, '_']
+                when '\d'
+                  [0..9]
                 else
                   raise Racc::ParseError, "not support meta character #{first}"
                 end
