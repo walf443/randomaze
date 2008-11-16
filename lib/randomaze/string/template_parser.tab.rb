@@ -16,7 +16,7 @@ module Randomaze
 
     class TemplateParser < Racc::Parser
 
-module_eval <<'..end lib/randomaze/string/template_parser.y modeval..id4a036b05d9', 'lib/randomaze/string/template_parser.y', 86
+module_eval <<'..end lib/randomaze/string/template_parser.y modeval..idc678c77ddb', 'lib/randomaze/string/template_parser.y', 87
 
 def self.parse str
   new.parse(str)
@@ -91,7 +91,7 @@ def self.tokenize str
   tokens
 end
 
-..end lib/randomaze/string/template_parser.y modeval..id4a036b05d9
+..end lib/randomaze/string/template_parser.y modeval..idc678c77ddb
 
 ##### racc 1.4.5 generates ###
 
@@ -303,12 +303,13 @@ module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 58
 
  # reduce 14 omitted
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 75
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 76
   def _reduce_15( val, _values, result )
               first = val.shift
               result =
                 case first
                 when '\w'
+                  # FIXME: \w is not generate multi byte character.
                   ['a'..'z', 'A'..'Z', 0..9, '_']
                 when '\d'
                   [0..9]

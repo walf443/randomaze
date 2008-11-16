@@ -66,6 +66,7 @@ rule
               result =
                 case first
                 when '\w'
+                  # FIXME: \w is not generate multi byte character.
                   ['a'..'z', 'A'..'Z', 0..9, '_']
                 when '\d'
                   [0..9]
