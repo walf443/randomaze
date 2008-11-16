@@ -44,10 +44,10 @@ begin
         [ { "あいう"            => ['あいう']                         }, 'with non-random expression'],
 
         [ { '\d'                => [[[0..9], 1]]                           }, 'with non-set expression ( \d )'],
-        [ { '\w'                => [[['a'..'z', 'A'..'Z', 0..9, '_'], 1]]  }, 'with non-set expression ( \d )'],
+        [ { '\w'                => [[['a'..'z', 'A'..'Z', 0..9, '_'], 1]]  }, 'with non-set expression ( \w )'],
 
         [ { '\d{1}'             => [[[0..9], 1]]                           }, 'with non-set expression ( \d )'],
-        [ { '\w{1}'             => [[['a'..'z', 'A'..'Z', 0..9, '_'], 1]]  }, 'with non-set expression ( \d )'],
+        [ { '\w{1}'             => [[['a'..'z', 'A'..'Z', 0..9, '_'], 1]]  }, 'with non-set expression ( \w )'],
 
         [ { "abc[0-9]{1}"             => ['abc', [[0..9], 1]]                     }, 'mixed with non-random expression in head'],
         [ { "__[0-9]{1}"              => ['__', [[0..9], 1]]                      }, 'mixed with non-random expression in head (symbol)'],
