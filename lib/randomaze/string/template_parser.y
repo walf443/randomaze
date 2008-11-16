@@ -52,7 +52,11 @@ rule
 
   count_expr : COUNT_START NUMBER COUNT_END
              {
-              result = val[1]
+               result = val[1]
+             }
+             | COUNT_START NUMBER ',' NUMBER COUNT_END
+             {
+               result = val[1]..val[3]
              }
 
   sets      :
@@ -134,14 +138,48 @@ end
 def self.tokenize str
   tokens = []
   s = StringScanner.new str
-  set_start_fg = false
+  state = :default
   until s.eos? do
-    if set_start_fg
+    case state
+    when :default
+      case
+      when s.scan(/\\./)
+        tokens.push([:META_SET, s[0]])
+      when s.scan(/\./)
+        tokens.push([:DOT, s[0]])
+      when s.scan(/\[/)
+        state = :set_expr
+        tokens.push([:EXPR_START, '[' ])
+        tokens.push([:SETS_START, '[' ])
+      when s.scan(/\{/)
+        state = :count_expr
+        tokens.push([:COUNT_START, '{' ])
+      when s.scan(%r![^\\\[\{\}\]]+!)
+        tokens.push [:IDENT_WORD, s[0]]
+      else
+        char = s.getch
+        tokens.push [char, char]
+      end
+    when :count_expr
+      case
+      when s.scan(/\}/)
+        state = :default
+        tokens.push([:COUNT_END, '}' ])
+      when s.scan(/[0-9]+/)
+        tokens.push([:NUMBER, s[0].to_i ])
+      when s.scan(/,/)
+        tokens.push([',', ','])
+      else
+        char = s.getch
+        raise Racc::ParseError, "invalid char #{char}"
+      end
+
+    when :set_expr
       case
       when s.scan(/\\./)
         tokens.push([:META_SET, s[0]])
       when s.scan(/\]/)
-        set_start_fg = false
+        state = :default
         tokens.push([:SETS_END, ']' ])
       when s.scan(/([\w])-([\w])/)
         tokens.push([ :RANGE, [ s[1], s[2] ] ])
@@ -158,27 +196,7 @@ def self.tokenize str
         tokens.push [:IDENT, char]
       end
     else
-      case
-      when s.scan(/\\./)
-        tokens.push([:META_SET, s[0]])
-      when s.scan(/\./)
-        tokens.push([:DOT, s[0]])
-      when s.scan(/\[/)
-        set_start_fg = true
-        tokens.push([:EXPR_START, '[' ])
-        tokens.push([:SETS_START, '[' ])
-      when s.scan(/\{/)
-        tokens.push([:COUNT_START, '{' ])
-      when s.scan(/\}/)
-        tokens.push([:COUNT_END, '}' ])
-      when s.scan(/[0-9]+/)
-        tokens.push([:NUMBER, s[0].to_i ])
-      when s.scan(%r![^\\\[\{\}\]]+!)
-        tokens.push [:IDENT_WORD, s[0]]
-      else
-        char = s.getch
-        tokens.push [char, char]
-      end
+      raise "must not happend!!"
     end
   end
 

@@ -20,6 +20,11 @@ module Randomaze
       def from_array array, length=random_length, &check
         check_result check do
           result = []
+          case length
+          when Range
+            tmp = length.to_a
+            length = tmp[Randomaze.rand(tmp.size)]
+          end
           length.times do
             result << array[Randomaze.rand(array.size)]
           end
