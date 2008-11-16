@@ -4,7 +4,7 @@ module Randomaze
 
     module Core
       def default_max_length
-        @default_max_length ||= 19
+        @default_max_length ||= 1024
       end
 
       def random_length
