@@ -35,10 +35,18 @@ rule
               result = val
             }
 
-  set       : alnum '-' alnum
+  set       : range
+            | ident
             {
-              result = val[0]..val[2]
+              result = val
             }
+
+  range     : RANGE alnum alnum
+            {
+              result = val[1]..val[2]
+            }
+  ident     : IDENT
+            | alnum
 
   alnum     : ALPHA
             | NUMCHAR
@@ -82,7 +90,19 @@ def scan_str
       case
       when @s.scan(/\]/)
         set_start_fg = false
-        @tokens.push([:SETS_END, '[' ])
+        @tokens.push([:SETS_END, ']' ])
+      when @s.scan(/([A-Za-z0-9])-([A-Za-z0-9])/)
+        @tokens.push([ :RANGE, [ @s[1], @s[2] ] ])
+        if @s[1] =~ /[a-zA-Z]/ && @s[2] =~ /[a-zA-Z]/
+          @tokens.push([ :ALPHA, @s[1] ])
+          @tokens.push([ :ALPHA, @s[2] ])
+        elsif @s[1] =~ /[0-9]/ && @s[2] =~ /[0-9]/
+          @tokens.push([ :NUMCHAR, @s[1].to_i ])
+          @tokens.push([ :NUMCHAR, @s[2].to_i ])
+        else
+          raise Racc::ParseError, "#{@s[0]} is wrong"
+        end
+
       when @s.scan(/[0-9]+/)
         raise Racc::ParseError, "#{@s[0]} is wrong" if @s[0].size > 1
         @tokens.push([:NUMCHAR, @s[0].to_i ])
@@ -91,7 +111,8 @@ def scan_str
       when @s.scan(/-/)
         @tokens.push(['-', @s[0] ])
       else
-        raise Racc::ParseError, "#{@s[0]} is wrong"
+        s = @s.getch
+        @tokens.push [:IDENT, s]
       end
     else
       case

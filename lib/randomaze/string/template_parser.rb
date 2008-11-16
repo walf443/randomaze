@@ -16,7 +16,7 @@ module Randomaze
 
     class TemplateParser < Racc::Parser
 
-module_eval <<'..end lib/randomaze/string/template_parser.y modeval..id0f3d07a9ca', 'lib/randomaze/string/template_parser.y', 52
+module_eval <<'..end lib/randomaze/string/template_parser.y modeval..id622e93103b', 'lib/randomaze/string/template_parser.y', 60
 
 def self.parse str
   new.parse(str)
@@ -50,7 +50,19 @@ def scan_str
       case
       when @s.scan(/\]/)
         set_start_fg = false
-        @tokens.push([:SETS_END, '[' ])
+        @tokens.push([:SETS_END, ']' ])
+      when @s.scan(/([A-Za-z0-9])-([A-Za-z0-9])/)
+        @tokens.push([ :RANGE, [ @s[1], @s[2] ] ])
+        if @s[1] =~ /[a-zA-Z]/ && @s[2] =~ /[a-zA-Z]/
+          @tokens.push([ :ALPHA, @s[1] ])
+          @tokens.push([ :ALPHA, @s[2] ])
+        elsif @s[1] =~ /[0-9]/ && @s[2] =~ /[0-9]/
+          @tokens.push([ :NUMCHAR, @s[1].to_i ])
+          @tokens.push([ :NUMCHAR, @s[2].to_i ])
+        else
+          raise Racc::ParseError, "#{@s[0]} is wrong"
+        end
+
       when @s.scan(/[0-9]+/)
         raise Racc::ParseError, "#{@s[0]} is wrong" if @s[0].size > 1
         @tokens.push([:NUMCHAR, @s[0].to_i ])
@@ -59,7 +71,8 @@ def scan_str
       when @s.scan(/-/)
         @tokens.push(['-', @s[0] ])
       else
-        raise Racc::ParseError, "#{@s[0]} is wrong"
+        s = @s.getch
+        @tokens.push [:IDENT, s]
       end
     else
       case
@@ -81,56 +94,64 @@ def scan_str
   end
 end
 
-..end lib/randomaze/string/template_parser.y modeval..id0f3d07a9ca
+..end lib/randomaze/string/template_parser.y modeval..id622e93103b
 
 ##### racc 1.4.5 generates ###
 
 racc_reduce_table = [
  0, 0, :racc_error,
- 0, 12, :_reduce_none,
- 2, 12, :_reduce_2,
- 3, 13, :_reduce_3,
- 3, 14, :_reduce_4,
- 3, 15, :_reduce_5,
- 0, 16, :_reduce_none,
- 2, 16, :_reduce_7,
- 3, 17, :_reduce_8,
+ 0, 13, :_reduce_none,
+ 2, 13, :_reduce_2,
+ 3, 14, :_reduce_3,
+ 3, 15, :_reduce_4,
+ 3, 16, :_reduce_5,
+ 0, 17, :_reduce_none,
+ 2, 17, :_reduce_7,
  1, 18, :_reduce_none,
- 1, 18, :_reduce_none ]
+ 1, 18, :_reduce_9,
+ 3, 19, :_reduce_10,
+ 1, 20, :_reduce_none,
+ 1, 20, :_reduce_none,
+ 1, 21, :_reduce_none,
+ 1, 21, :_reduce_none ]
 
-racc_reduce_n = 11
+racc_reduce_n = 15
 
-racc_shift_n = 22
+racc_shift_n = 26
 
 racc_action_table = [
-    12,    13,    12,    13,    12,    13,    15,     8,     2,     2,
-    16,     5,    18,    19,     4,    21 ]
+    11,    13,    15,     8,    11,    13,    15,     8,    15,     8,
+    15,     8,    19,    17,     1,    20,     1,     6,    23,     4,
+    25 ]
 
 racc_action_check = [
-     5,     5,    18,    18,    10,    10,     6,     4,     0,     3,
-     9,     2,    11,    15,     1,    19 ]
+     4,     4,     4,     4,    10,    10,    10,    10,    22,    22,
+    11,    11,     6,     5,     0,     9,     3,     2,    17,     1,
+    23 ]
 
 racc_action_pointer = [
-     6,    14,     8,     7,     7,    -9,     1,   nil,   nil,     6,
-    -5,     4,   nil,   nil,   nil,     7,   nil,   nil,    -7,     8,
-   nil,   nil ]
+    12,    16,    17,    14,    -8,     8,    12,   nil,   nil,    11,
+    -4,     0,   nil,   nil,   nil,   nil,   nil,    12,   nil,   nil,
+   nil,   nil,    -2,    13,   nil,   nil ]
 
 racc_action_default = [
-    -1,   -11,   -11,    -1,   -11,    -6,   -11,    -2,    22,   -11,
-    -6,   -11,    -9,   -10,    -3,   -11,    -4,    -7,   -11,   -11,
-    -8,    -5 ]
+    -1,   -15,   -15,    -1,    -6,   -15,   -15,    -2,   -14,   -15,
+    -6,   -15,    -8,   -11,    -9,   -13,   -12,   -15,    -3,    26,
+    -4,    -7,   -15,   -15,   -10,    -5 ]
 
 racc_goto_table = [
-     9,     1,    14,     6,     7,    17,    20 ]
+    22,     9,     2,     5,    18,     7,   nil,    21,   nil,   nil,
+   nil,    24 ]
 
 racc_goto_check = [
-     5,     1,     4,     3,     1,     5,     7 ]
+     9,     5,     1,     3,     4,     1,   nil,     5,   nil,   nil,
+   nil,     9 ]
 
 racc_goto_pointer = [
-   nil,     1,   nil,     1,    -4,    -5,   nil,   -12 ]
+   nil,     2,   nil,     2,    -1,    -3,   nil,   nil,   nil,   -11 ]
 
 racc_goto_default = [
-   nil,   nil,     3,   nil,   nil,   nil,    10,    11 ]
+   nil,   nil,     3,   nil,   nil,   nil,    10,    12,    14,    16 ]
 
 racc_token_table = {
  false => 0,
@@ -141,13 +162,14 @@ racc_token_table = {
  :COUNT_START => 5,
  :NUMBER => 6,
  :COUNT_END => 7,
- "-" => 8,
- :ALPHA => 9,
- :NUMCHAR => 10 }
+ :RANGE => 8,
+ :IDENT => 9,
+ :ALPHA => 10,
+ :NUMCHAR => 11 }
 
 racc_use_result_var = true
 
-racc_nt_base = 11
+racc_nt_base = 12
 
 Racc_arg = [
  racc_action_table,
@@ -174,7 +196,8 @@ Racc_token_to_s_table = [
 'COUNT_START',
 'NUMBER',
 'COUNT_END',
-'"-"',
+'RANGE',
+'IDENT',
 'ALPHA',
 'NUMCHAR',
 '$start',
@@ -184,6 +207,8 @@ Racc_token_to_s_table = [
 'count_expr',
 'sets',
 'set',
+'range',
+'ident',
 'alnum']
 
 Racc_debug_parser = false
@@ -238,16 +263,29 @@ module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 36
   end
 .,.,
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 41
-  def _reduce_8( val, _values, result )
-              result = val[0]..val[2]
+ # reduce 8 omitted
+
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 42
+  def _reduce_9( val, _values, result )
+              result = val
    result
   end
 .,.,
 
- # reduce 9 omitted
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 47
+  def _reduce_10( val, _values, result )
+              result = val[1]..val[2]
+   result
+  end
+.,.,
 
- # reduce 10 omitted
+ # reduce 11 omitted
+
+ # reduce 12 omitted
+
+ # reduce 13 omitted
+
+ # reduce 14 omitted
 
  def _reduce_none( val, _values, result )
   result
