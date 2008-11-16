@@ -173,7 +173,7 @@ def self.tokenize str
         tokens.push([:COUNT_END, '}' ])
       when s.scan(/[0-9]+/)
         tokens.push([:NUMBER, s[0].to_i ])
-      when s.scan(%r![^\[\{\}\]]+!)
+      when s.scan(%r![^\\\[\{\}\]]+!)
         tokens.push [:IDENT_WORD, s[0]]
       else
         char = s.getch
