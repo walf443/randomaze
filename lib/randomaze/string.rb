@@ -22,10 +22,10 @@ module Randomaze
           result = []
           case length
           when Range
-            if length == 0..1
-              length = Randomaze.rand
+            tmp = length.to_a
+            if ( tmp.first == 0 && tmp.last == 1 )
+              length = Randomaze.rand.round
             else
-              tmp = length.to_a
               length = tmp[Randomaze.rand(tmp.size)]
             end
           end
