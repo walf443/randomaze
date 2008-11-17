@@ -23,10 +23,13 @@ module Randomaze
         check_result check do
           result = []
           case length
-          when Range
+          when Range, Array
             tmp = length.to_a
             if ( tmp.first == 0 && tmp.last == 1 )
               length = Randomaze.rand.round
+            elsif ( tmp.last.nil? )
+              range = (tmp.first..default_max_length).to_a
+              length = range[Randomaze.rand(range.size)]
             else
               length = tmp[Randomaze.rand(tmp.size)]
             end

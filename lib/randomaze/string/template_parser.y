@@ -66,6 +66,10 @@ rule
              {
                result = val[1]
              }
+             | COUNT_START NUMBER ',' COUNT_END
+             {
+               result = [ val[1], nil ]
+             }
              | COUNT_START NUMBER ',' NUMBER COUNT_END
              {
                result = val[1]..val[3]
@@ -73,6 +77,14 @@ rule
              | QUESTION
              {
                result = 0..1
+             }
+             | ASTERISK
+             {
+               result = [0, nil]
+             }
+             | PLUS
+             {
+               result = [1, nil]
              }
 
   sets      :
@@ -166,6 +178,10 @@ def self.tokenize str
         tokens.push([:DOT, s[0]])
       when s.scan(/\?/)
         tokens.push([:QUESTION, s[0]])
+      when s.scan(/\*(\?)?/)
+        tokens.push([:ASTERISK, s[0]])
+      when s.scan(/\+(\?)?/)
+        tokens.push([:PLUS, s[0]])
       when s.scan(/\[/)
         state = :set_expr
         tokens.push([:EXPR_START, '[' ])
