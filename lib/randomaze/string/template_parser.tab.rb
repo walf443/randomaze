@@ -17,7 +17,7 @@ module Randomaze
 
     class TemplateParser < Racc::Parser
 
-module_eval <<'..end lib/randomaze/string/template_parser.y modeval..idc7a9dcb04d', 'lib/randomaze/string/template_parser.y', 135
+module_eval <<'..end lib/randomaze/string/template_parser.y modeval..id128cf0f287', 'lib/randomaze/string/template_parser.y', 135
 
 def self.parse str
   new.parse(str)
@@ -45,6 +45,8 @@ def meta_set str
     ['a'..'z', 'A'..'Z', 0..9, '_']
   when '\d'
     [0..9]
+  when '\s'
+    [' ', "\t", "\n", "\r", "\f"]
   else
     raise Racc::ParseError, "not support meta character #{first}"
   end
@@ -137,7 +139,7 @@ def self.tokenize str
   tokens
 end
 
-..end lib/randomaze/string/template_parser.y modeval..idc7a9dcb04d
+..end lib/randomaze/string/template_parser.y modeval..id128cf0f287
 
 ##### racc 1.4.5 generates ###
 

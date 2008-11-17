@@ -159,6 +159,8 @@ def meta_set str
     ['a'..'z', 'A'..'Z', 0..9, '_']
   when '\d'
     [0..9]
+  when '\s'
+    [' ', "\t", "\n", "\r", "\f"]
   else
     raise Racc::ParseError, "not support meta character #{first}"
   end
