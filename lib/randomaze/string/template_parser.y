@@ -190,7 +190,8 @@ def self.tokenize str
         state = :set_expr
         tokens.push([:EXPR_START, '[' ])
         tokens.push([:SETS_START, '[' ])
-      when s.scan(/\(/)
+      when s.skip(/\(\?#.+\)/) # COMMENT
+      when s.scan(/\((\?:)?/)
         tokens.push([:SELECT_START, '(' ])
       when s.scan(/\)/)
         tokens.push([:SELECT_END, ')' ])

@@ -65,9 +65,12 @@ begin
 
         [ { "(abc)"             => ['abc']                            }, 'with non-select expression' ],
         [ { "(abc|def)"         => [Set.new(['abc', 'def'])]          }, 'with select expression'],
+        [ { "(?:abc|def)"         => [Set.new(['abc', 'def'])]          }, 'with select expression'],
         [ { "(abc|[a-z])"       => [Set.new(['abc', [['a'..'z'], 1]])] }, 'mix with select expression and set_expr '],
 
         [ { "(abc|[a-z])?"       => [[Set.new(['abc', [['a'..'z'], 1]]), 0..1]] }, 'mix with select expression and set_expr '],
+
+        [ { "(?# mova[jofa])hoge" => ['hoge']                         }, 'comment'],
 
         [ { '\d'                => [[[0..9], 1]]                      }, 'with non-set expression ( \d )'],
         [ { '\d?'               => [[[0..9], 0..1]]                   }, 'with non-set expression ( \d? )'],
