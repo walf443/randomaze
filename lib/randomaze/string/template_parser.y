@@ -17,6 +17,10 @@ rule
             {
               result = val[1]
             }
+            | SELECT_START expr SELECT_END count_expr
+            {
+              result = [ val[1], val[3] ]
+            }
             | expr '|' expr
             {
               result = Set.new([val[0], val[2]])

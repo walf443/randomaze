@@ -17,7 +17,7 @@ module Randomaze
 
     class TemplateParser < Racc::Parser
 
-module_eval <<'..end lib/randomaze/string/template_parser.y modeval..id2d57df7887', 'lib/randomaze/string/template_parser.y', 131
+module_eval <<'..end lib/randomaze/string/template_parser.y modeval..id1942a4e332', 'lib/randomaze/string/template_parser.y', 135
 
 def self.parse str
   new.parse(str)
@@ -136,7 +136,7 @@ def self.tokenize str
   tokens
 end
 
-..end lib/randomaze/string/template_parser.y modeval..id2d57df7887
+..end lib/randomaze/string/template_parser.y modeval..id1942a4e332
 
 ##### racc 1.4.5 generates ###
 
@@ -147,75 +147,80 @@ racc_reduce_table = [
  1, 25, :_reduce_none,
  1, 25, :_reduce_4,
  3, 25, :_reduce_5,
- 3, 25, :_reduce_6,
- 1, 25, :_reduce_7,
- 2, 25, :_reduce_8,
+ 4, 25, :_reduce_6,
+ 3, 25, :_reduce_7,
+ 1, 25, :_reduce_8,
  2, 25, :_reduce_9,
  2, 25, :_reduce_10,
- 3, 25, :_reduce_11,
- 3, 26, :_reduce_12,
+ 2, 25, :_reduce_11,
+ 3, 25, :_reduce_12,
  3, 27, :_reduce_13,
- 4, 27, :_reduce_14,
- 5, 27, :_reduce_15,
- 1, 27, :_reduce_16,
- 1, 27, :_reduce_17,
- 1, 27, :_reduce_18,
+ 3, 26, :_reduce_14,
+ 4, 26, :_reduce_15,
+ 5, 26, :_reduce_16,
+ 1, 26, :_reduce_17,
+ 1, 26, :_reduce_18,
+ 1, 26, :_reduce_19,
  0, 28, :_reduce_none,
- 2, 28, :_reduce_20,
+ 2, 28, :_reduce_21,
  1, 29, :_reduce_none,
- 1, 29, :_reduce_22,
- 1, 30, :_reduce_23,
+ 1, 29, :_reduce_23,
+ 1, 30, :_reduce_24,
  1, 31, :_reduce_none,
  1, 31, :_reduce_none,
  2, 31, :_reduce_none,
- 1, 31, :_reduce_27,
+ 1, 31, :_reduce_28,
  1, 32, :_reduce_none,
  1, 32, :_reduce_none ]
 
-racc_reduce_n = 30
+racc_reduce_n = 31
 
-racc_shift_n = 44
+racc_shift_n = 45
 
 racc_action_table = [
-    27,     1,     3,     5,     9,    27,     6,     7,    10,    11,
+    27,     1,     3,     5,     9,    27,     6,     7,    10,    12,
     13,    28,    30,    32,    34,    25,    28,    30,    32,    34,
     25,     1,     3,     5,    21,    15,     6,     7,     1,     3,
-     5,     9,    20,     6,     7,    10,    11,    13,     1,     3,
-     5,     9,    15,     6,     7,    10,    11,    13,    36,    37,
-    41,    42,    23,    15,    38,    19,    40,     8,    43 ]
+     5,     9,    15,     6,     7,    10,    12,    13,     1,     3,
+     5,     9,    20,     6,     7,    10,    12,    13,     9,    42,
+    43,    39,    10,    12,    13,    36,    37,    23,    15,    19,
+    41,     8,    44 ]
 
 racc_action_check = [
-    19,     5,     5,     5,     3,    29,     5,     5,     3,     3,
-     3,    19,    19,    19,    19,    19,    29,    29,    29,    29,
-    29,     4,     4,     4,     9,     4,     4,     4,     0,     0,
-     0,    18,     8,     0,     0,    18,    18,    18,    15,    15,
-    15,     6,    22,    15,    15,     6,     6,     6,    21,    21,
-    37,    37,    16,    16,    26,     7,    32,     2,    41 ]
+    29,     0,     0,     0,     6,    19,     0,     0,     6,     6,
+     6,    29,    29,    29,    29,    29,    19,    19,    19,    19,
+    19,     4,     4,     4,     9,     4,     4,     4,     5,     5,
+     5,     3,    22,     5,     5,     3,     3,     3,    15,    15,
+    15,    18,     8,    15,    15,    18,    18,    18,    23,    37,
+    37,    26,    23,    23,    23,    21,    21,    16,    16,     7,
+    32,     2,    42 ]
 
 racc_action_pointer = [
-    26,   nil,    57,    -7,    19,    -1,    30,    46,    32,    12,
-   nil,   nil,   nil,   nil,   nil,    36,    47,   nil,    20,    -7,
-   nil,    35,    36,   nil,   nil,   nil,    44,   nil,   nil,    -2,
-   nil,   nil,    36,   nil,   nil,   nil,   nil,    38,   nil,   nil,
-   nil,    45,   nil,   nil ]
+    -1,   nil,    61,    20,    19,    26,    -7,    50,    42,    12,
+   nil,   nil,   nil,   nil,   nil,    36,    52,   nil,    30,    -2,
+   nil,    42,    26,    37,   nil,   nil,    41,   nil,   nil,    -7,
+   nil,   nil,    40,   nil,   nil,   nil,   nil,    37,   nil,   nil,
+   nil,   nil,    49,   nil,   nil ]
 
 racc_action_default = [
-    -1,    -3,   -30,    -4,    -1,   -30,    -7,   -30,   -30,   -30,
-   -16,   -17,    -9,   -18,    -2,   -30,   -30,   -10,    -8,   -19,
-    44,   -30,    -6,    -5,   -11,   -29,   -30,   -27,   -23,   -19,
-   -24,   -21,   -30,   -22,   -28,   -25,   -13,   -30,   -12,   -20,
-   -26,   -30,   -14,   -15 ]
+    -1,    -3,   -31,    -4,    -1,   -31,    -8,   -31,   -31,   -31,
+   -17,   -10,   -18,   -19,    -2,   -31,   -31,   -11,    -9,   -20,
+    45,   -31,    -7,    -5,   -12,   -30,   -31,   -28,   -24,   -20,
+   -25,   -22,   -31,   -23,   -29,   -26,   -14,   -31,    -6,   -13,
+   -21,   -27,   -31,   -15,   -16 ]
 
 racc_goto_table = [
-    12,    16,    26,    17,     2,    18,   nil,   nil,    14,   nil,
-   nil,    22,    39,   nil,   nil,    24 ]
+    11,    16,    26,    17,     2,    18,   nil,   nil,    14,   nil,
+   nil,    22,    40,   nil,   nil,    24,   nil,   nil,   nil,   nil,
+    38 ]
 
 racc_goto_check = [
-     4,     2,     5,     4,     1,     3,   nil,   nil,     1,   nil,
-   nil,     2,     5,   nil,   nil,     4 ]
+     3,     2,     5,     3,     1,     4,   nil,   nil,     1,   nil,
+   nil,     2,     5,   nil,   nil,     3,   nil,   nil,   nil,   nil,
+     3 ]
 
 racc_goto_pointer = [
-   nil,     4,    -4,    -2,    -3,   -17,   nil,   nil,   nil,   nil ]
+   nil,     4,    -4,    -3,    -2,   -17,   nil,   nil,   nil,   nil ]
 
 racc_goto_default = [
    nil,   nil,     4,   nil,   nil,   nil,    29,    31,    33,    35 ]
@@ -292,8 +297,8 @@ Racc_token_to_s_table = [
 '$start',
 'exprs',
 'expr',
-'sets_expr',
 'count_expr',
+'sets_expr',
 'sets',
 'set',
 'range',
@@ -334,44 +339,51 @@ module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 19
 
 module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 23
   def _reduce_6( val, _values, result )
-              result = Set.new([val[0], val[2]])
+              result = [ val[1], val[3] ]
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 28
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 27
   def _reduce_7( val, _values, result )
-              token = val.shift
-              result = [ meta_set(token), 1]
+              result = Set.new([val[0], val[2]])
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 32
   def _reduce_8( val, _values, result )
+              token = val.shift
+              result = [ meta_set(token), 1]
+   result
+  end
+.,.,
+
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 36
+  def _reduce_9( val, _values, result )
               result = [ val[1], 1]
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 37
-  def _reduce_9( val, _values, result )
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 41
+  def _reduce_10( val, _values, result )
               token, count = val
               result = [ ['a'..'z', 'A'..'Z', 0..9, '_'], count ]
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 42
-  def _reduce_10( val, _values, result )
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 46
+  def _reduce_11( val, _values, result )
               token, count = val
               result = [ meta_set(token), count ]
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 52
-  def _reduce_11( val, _values, result )
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 56
+  def _reduce_12( val, _values, result )
               first = val.shift
               result = nil
               if first == '['
@@ -383,8 +395,8 @@ module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 52
   end
 .,.,
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 63
-  def _reduce_12( val, _values, result )
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 67
+  def _reduce_13( val, _values, result )
               array = []
               val[1].flatten.each do |range|
                 next unless range
@@ -396,68 +408,68 @@ module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 63
   end
 .,.,
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 68
-  def _reduce_13( val, _values, result )
-               result = val[1]
-   result
-  end
-.,.,
-
 module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 72
   def _reduce_14( val, _values, result )
-               result = [ val[1], nil ]
+               result = val[1]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 76
   def _reduce_15( val, _values, result )
-               result = val[1]..val[3]
+               result = [ val[1], nil ]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 80
   def _reduce_16( val, _values, result )
-               result = 0..1
+               result = val[1]..val[3]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 84
   def _reduce_17( val, _values, result )
-               result = [0, nil]
+               result = 0..1
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 88
   def _reduce_18( val, _values, result )
+               result = [0, nil]
+   result
+  end
+.,.,
+
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 92
+  def _reduce_19( val, _values, result )
                result = [1, nil]
    result
   end
 .,.,
 
- # reduce 19 omitted
+ # reduce 20 omitted
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 94
-  def _reduce_20( val, _values, result )
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 98
+  def _reduce_21( val, _values, result )
               result = val
    result
   end
 .,.,
 
- # reduce 21 omitted
+ # reduce 22 omitted
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 100
-  def _reduce_22( val, _values, result )
-              result = val
-   result
-  end
-.,.,
-
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 110
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 104
   def _reduce_23( val, _values, result )
+              result = val
+   result
+  end
+.,.,
+
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 114
+  def _reduce_24( val, _values, result )
               first,last = val.first.to_a
               if first =~ /\d/ && last =~ /\d/
                 first = first.to_i
@@ -468,23 +480,23 @@ module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 110
   end
 .,.,
 
- # reduce 24 omitted
-
  # reduce 25 omitted
 
  # reduce 26 omitted
 
-module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 119
-  def _reduce_27( val, _values, result )
+ # reduce 27 omitted
+
+module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 123
+  def _reduce_28( val, _values, result )
               first = val.shift
               result = meta_set(first)
    result
   end
 .,.,
 
- # reduce 28 omitted
-
  # reduce 29 omitted
+
+ # reduce 30 omitted
 
  def _reduce_none( val, _values, result )
   result
