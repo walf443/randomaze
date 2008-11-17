@@ -17,9 +17,9 @@ rule
             {
               result = val[1]
             }
-            | SELECT_START expr '|' expr SELECT_END
+            | expr '|' expr
             {
-              result = Set.new([val[1], val[3]])
+              result = Set.new([val[0], val[2]])
             }
             | META_SET
             {

@@ -17,7 +17,7 @@ module Randomaze
 
     class TemplateParser < Racc::Parser
 
-module_eval <<'..end lib/randomaze/string/template_parser.y modeval..id725b685947', 'lib/randomaze/string/template_parser.y', 131
+module_eval <<'..end lib/randomaze/string/template_parser.y modeval..id2d57df7887', 'lib/randomaze/string/template_parser.y', 131
 
 def self.parse str
   new.parse(str)
@@ -136,7 +136,7 @@ def self.tokenize str
   tokens
 end
 
-..end lib/randomaze/string/template_parser.y modeval..id725b685947
+..end lib/randomaze/string/template_parser.y modeval..id2d57df7887
 
 ##### racc 1.4.5 generates ###
 
@@ -147,7 +147,7 @@ racc_reduce_table = [
  1, 25, :_reduce_none,
  1, 25, :_reduce_4,
  3, 25, :_reduce_5,
- 5, 25, :_reduce_6,
+ 3, 25, :_reduce_6,
  1, 25, :_reduce_7,
  2, 25, :_reduce_8,
  2, 25, :_reduce_9,
@@ -174,51 +174,51 @@ racc_reduce_table = [
 
 racc_reduce_n = 30
 
-racc_shift_n = 45
+racc_shift_n = 44
 
 racc_action_table = [
-    26,     1,     3,     5,     9,    26,     6,     7,    10,    11,
-    13,    27,    29,    31,    33,    24,    27,    29,    31,    33,
-    24,     1,     3,     5,     9,    38,     6,     7,    10,    11,
-    13,     1,     3,     5,    21,    22,     6,     7,     1,     3,
-     5,     9,    18,     6,     7,    10,    11,    13,    41,    42,
-    35,    36,    19,     8,    40,    20,    43,    44 ]
+    27,     1,     3,     5,     9,    27,     6,     7,    10,    11,
+    13,    28,    30,    32,    34,    25,    28,    30,    32,    34,
+    25,     1,     3,     5,    21,    15,     6,     7,     1,     3,
+     5,     9,    20,     6,     7,    10,    11,    13,     1,     3,
+     5,     9,    15,     6,     7,    10,    11,    13,    36,    37,
+    41,    42,    23,    15,    38,    19,    40,     8,    43 ]
 
 racc_action_check = [
-    18,     5,     5,     5,     3,    28,     5,     5,     3,     3,
-     3,    18,    18,    18,    18,    18,    28,    28,    28,    28,
-    28,     4,     4,     4,     6,    25,     4,     4,     6,     6,
-     6,    22,    22,    22,    15,    15,    22,    22,     0,     0,
-     0,    17,     7,     0,     0,    17,    17,    17,    36,    36,
-    20,    20,     8,     2,    31,     9,    37,    41 ]
+    19,     5,     5,     5,     3,    29,     5,     5,     3,     3,
+     3,    19,    19,    19,    19,    19,    29,    29,    29,    29,
+    29,     4,     4,     4,     9,     4,     4,     4,     0,     0,
+     0,    18,     8,     0,     0,    18,    18,    18,    15,    15,
+    15,     6,    22,    15,    15,     6,     6,     6,    21,    21,
+    37,    37,    16,    16,    26,     7,    32,     2,    41 ]
 
 racc_action_pointer = [
-    36,   nil,    53,    -7,    19,    -1,    13,    33,    52,    43,
-   nil,   nil,   nil,   nil,   nil,    29,   nil,    30,    -7,   nil,
-    37,   nil,    29,   nil,   nil,    15,   nil,   nil,    -2,   nil,
-   nil,    34,   nil,   nil,   nil,   nil,    36,    51,   nil,   nil,
-   nil,    44,   nil,   nil,   nil ]
+    26,   nil,    57,    -7,    19,    -1,    30,    46,    32,    12,
+   nil,   nil,   nil,   nil,   nil,    36,    47,   nil,    20,    -7,
+   nil,    35,    36,   nil,   nil,   nil,    44,   nil,   nil,    -2,
+   nil,   nil,    36,   nil,   nil,   nil,   nil,    38,   nil,   nil,
+   nil,    45,   nil,   nil ]
 
 racc_action_default = [
     -1,    -3,   -30,    -4,    -1,   -30,    -7,   -30,   -30,   -30,
-   -16,   -17,    -9,   -18,    -2,   -30,   -10,    -8,   -19,    45,
-   -30,    -5,   -30,   -11,   -29,   -30,   -27,   -23,   -19,   -24,
-   -21,   -30,   -22,   -28,   -25,   -13,   -30,   -30,   -12,   -20,
-   -26,   -30,   -14,    -6,   -15 ]
+   -16,   -17,    -9,   -18,    -2,   -30,   -30,   -10,    -8,   -19,
+    44,   -30,    -6,    -5,   -11,   -29,   -30,   -27,   -23,   -19,
+   -24,   -21,   -30,   -22,   -28,   -25,   -13,   -30,   -12,   -20,
+   -26,   -30,   -14,   -15 ]
 
 racc_goto_table = [
-    15,    12,    25,     2,    16,    17,   nil,    14,   nil,   nil,
-   nil,   nil,    39,   nil,   nil,    23,   nil,    37 ]
+    12,    16,    26,    17,     2,    18,   nil,   nil,    14,   nil,
+   nil,    22,    39,   nil,   nil,    24 ]
 
 racc_goto_check = [
-     2,     4,     5,     1,     4,     3,   nil,     1,   nil,   nil,
-   nil,   nil,     5,   nil,   nil,     4,   nil,     2 ]
+     4,     2,     5,     4,     1,     3,   nil,   nil,     1,   nil,
+   nil,     2,     5,   nil,   nil,     4 ]
 
 racc_goto_pointer = [
-   nil,     3,    -5,    -2,    -2,   -16,   nil,   nil,   nil,   nil ]
+   nil,     4,    -4,    -2,    -3,   -17,   nil,   nil,   nil,   nil ]
 
 racc_goto_default = [
-   nil,   nil,     4,   nil,   nil,   nil,    28,    30,    32,    34 ]
+   nil,   nil,     4,   nil,   nil,   nil,    29,    31,    33,    35 ]
 
 racc_token_table = {
  false => 0,
@@ -334,7 +334,7 @@ module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 19
 
 module_eval <<'.,.,', 'lib/randomaze/string/template_parser.y', 23
   def _reduce_6( val, _values, result )
-              result = Set.new([val[1], val[3]])
+              result = Set.new([val[0], val[2]])
    result
   end
 .,.,
